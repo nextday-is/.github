@@ -24,7 +24,9 @@ this page in the same change — never leave a one-off.
 |---|---|---|
 | Client / product slug | short brand name, one word if possible | `innbak`, `vokbaths`, `klaustur` |
 | GitHub repo (client system) | `<client>` | `nextday-is/innbak` |
-| GitHub repo (Nextday's own) | `nextday-<thing>` | `nextday-is/nextday-web` |
+| GitHub repo (Nextday's own) | `nextday-<thing>` | `nextday-is/nextday-web`, `nextday-is/nextday-clients`, `nextday-is/nextday-platform` |
+| Client registry entry | `clients/<slug>/client.json` in `nextday-clients` | `clients/innbak/client.json` |
+| GitHub deploy environment | `<slug>-production` (INNBAK: `production`, legacy) | `acme-production` |
 | Local clone | `C:\nextday\repos\<repo>` | `C:\nextday\repos\innbak` |
 | Cloudflare Worker | `<slug>-<component>` | `nextday-web`, `innbak-portal`, `innbak-warehouse-ingest` |
 | D1 database | `<slug>-<purpose>` | `innbak-warehouse` |
@@ -61,4 +63,5 @@ this page in the same change — never leave a one-off.
 | Product | Repo | Workers | Data | URL |
 |---|---|---|---|---|
 | Nextday website + demos | `nextday-web` | `nextday-web` | — | `/`, `/vokbaths/`, `/klaustur/` |
+| Client registry | `nextday-clients` | — | — | — |
 | INNBAK | `innbak` | `innbak-portal`, `innbak-warehouse-ingest` | D1 `innbak-warehouse`, R2 `innbak-warehouse-evidence`, queues `innbak-warehouse-ingest`, `innbak-warehouse-dlq` | `/innbak/` |
