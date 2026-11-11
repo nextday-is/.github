@@ -22,23 +22,22 @@ this page in the same change — never leave a one-off.
 
 | Thing | Pattern | Examples |
 |---|---|---|
-| Client / product slug | short brand name, one word if possible | `innbak`, `drfootball`, `vokbaths`, `klaustur` |
-| GitHub repo (client system) | `<client>` | `nextday-is/innbak`, `nextday-is/drfootball` |
+| Client / product slug | short brand name, one word if possible | `innbak`, `vokbaths`, `klaustur` |
+| GitHub repo (client system) | `<client>` | `nextday-is/innbak` |
 | GitHub repo (Nextday's own) | `nextday-<thing>` | `nextday-is/nextday-web` |
 | Local clone | `C:\nextday\repos\<repo>` | `C:\nextday\repos\innbak` |
-| Cloudflare Worker | `<slug>-<component>` | `nextday-web`, `innbak-portal`, `innbak-warehouse-ingest`, `drfootball-portal` |
-| D1 database | `<slug>-<purpose>` | `innbak-warehouse`, `drfootball-portal` |
+| Cloudflare Worker | `<slug>-<component>` | `nextday-web`, `innbak-portal`, `innbak-warehouse-ingest` |
+| D1 database | `<slug>-<purpose>` | `innbak-warehouse` |
 | R2 bucket | `<slug>-<purpose>-<content>` | `innbak-warehouse-evidence` |
 | Queue | `<slug>-<purpose>-<job>`, DLQ ends `-dlq` | `innbak-warehouse-ingest`, `innbak-warehouse-dlq` |
-| Binding (code) | `SCREAMING_SNAKE`, slug first | `INNBAK_WAREHOUSE`, `DRFOOTBALL`, `ASSETS` |
-| Secret | `<SYSTEM>_<KIND>` | `DK_API_KEY` |
+| Binding (code) | `SCREAMING_SNAKE`, slug first | `INNBAK_WAREHOUSE`, `INNBAK`, `ASSETS` |
+| Secret | `<SYSTEM>_<KIND>` | `DK_API_KEY`, `CLOUDFLARE_API_TOKEN` |
+| API token | `<slug>-<where>-<purpose>` | `innbak-github-deploy` |
 | Public URL path | `/<slug>/` | `/innbak/`, `/vokbaths/` |
 | MCP endpoint | `/<slug>/mcp` | `/innbak/mcp` |
 | Branch | `feat/…`, `fix/…`, `chore/…`, `docs/…` | `feat/budget-grid` |
 | Commit | Conventional Commits | `fix: handle empty invoice page` |
 
-**Known exception:** Dr. Football's public path is `/doc/` (and `/doc/mcp`) because clients and
-Claude connectors already use it. Code that serves it lives in `public/doc/` and `src/doc/`.
 
 ## Repo layout
 
@@ -62,5 +61,4 @@ Claude connectors already use it. Code that serves it lives in `public/doc/` and
 | Product | Repo | Workers | Data | URL |
 |---|---|---|---|---|
 | Nextday website + demos | `nextday-web` | `nextday-web` | — | `/`, `/vokbaths/`, `/klaustur/` |
-| Dr. Football | `drfootball` | `drfootball-portal` | D1 `drfootball-portal` | `/doc/` |
 | INNBAK | `innbak` | `innbak-portal`, `innbak-warehouse-ingest` | D1 `innbak-warehouse`, R2 `innbak-warehouse-evidence`, queues `innbak-warehouse-ingest`, `innbak-warehouse-dlq` | `/innbak/` |
