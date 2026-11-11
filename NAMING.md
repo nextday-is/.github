@@ -1,0 +1,66 @@
+# Naming & structure — Nextday standard
+
+**Naming and structure are a top priority at Nextday.** A name is an interface: people,
+scripts, Claude and clients all depend on it. Every new repo, Worker, database, folder,
+file, binding and URL follows this page. If something doesn't fit, fix the name or update
+this page in the same change — never leave a one-off.
+
+## Core rules
+
+1. **lowercase-kebab-case** for everything people type: repos, Workers, D1, R2, queues,
+   folders, files, URL paths, branch names.
+2. **Name things after what they are, not their history.** No `demo`, `new`, `v2`, `old`,
+   `test`, `final`, `homepage` on something that is none of those.
+3. **No redundant prefixes inside a scope.** In the `innbak` repo a file is
+   `tests/access.test.mjs`, not `tests/innbak-access.test.mjs`.
+4. **One name per thing, everywhere.** Repo, local folder, `package.json` name and docs use
+   the same slug.
+5. **Public URLs are contracts.** Never rename a live URL path or MCP endpoint without a
+   redirect and telling the client.
+
+## The pattern
+
+| Thing | Pattern | Examples |
+|---|---|---|
+| Client / product slug | short brand name, one word if possible | `innbak`, `drfootball`, `vokbaths`, `klaustur` |
+| GitHub repo (client system) | `<client>` | `nextday-is/innbak`, `nextday-is/drfootball` |
+| GitHub repo (Nextday's own) | `nextday-<thing>` | `nextday-is/nextday-web` |
+| Local clone | `C:\nextday\repos\<repo>` | `C:\nextday\repos\innbak` |
+| Cloudflare Worker | `<slug>-<component>` | `nextday-web`, `innbak-portal`, `innbak-warehouse-ingest`, `drfootball-portal` |
+| D1 database | `<slug>-<purpose>` | `innbak-warehouse`, `drfootball-portal` |
+| R2 bucket | `<slug>-<purpose>-<content>` | `innbak-warehouse-evidence` |
+| Queue | `<slug>-<purpose>-<job>`, DLQ ends `-dlq` | `innbak-warehouse-ingest`, `innbak-warehouse-dlq` |
+| Binding (code) | `SCREAMING_SNAKE`, slug first | `INNBAK_WAREHOUSE`, `DRFOOTBALL`, `ASSETS` |
+| Secret | `<SYSTEM>_<KIND>` | `DK_API_KEY` |
+| Public URL path | `/<slug>/` | `/innbak/`, `/vokbaths/` |
+| MCP endpoint | `/<slug>/mcp` | `/innbak/mcp` |
+| Branch | `feat/…`, `fix/…`, `chore/…`, `docs/…` | `feat/budget-grid` |
+| Commit | Conventional Commits | `fix: handle empty invoice page` |
+
+**Known exception:** Dr. Football's public path is `/doc/` (and `/doc/mcp`) because clients and
+Claude connectors already use it. Code that serves it lives in `public/doc/` and `src/doc/`.
+
+## Repo layout
+
+```
+<repo>/
+├── README.md            what it is, where it runs, how to deploy
+├── CLAUDE.md            points here; repo-specific rules
+├── src/                 Worker code (src/worker.ts is the entry)
+├── public/<path>/       static assets, folder = public URL path
+├── db/migrations/       D1 migrations (+ db/*.sql seeds)
+├── docs/                design and operations records
+├── scripts/             build/seed helpers
+├── tools/               owner-run tools (no "<client>-" prefix)
+├── tests/               *.test.mjs (unit), *.mjs (runnable checks)
+├── wrangler.jsonc       main Worker;  wrangler.<component>.jsonc for others
+└── .github/workflows/   ci.yml, deploy.yml
+```
+
+## Current map
+
+| Product | Repo | Workers | Data | URL |
+|---|---|---|---|---|
+| Nextday website + demos | `nextday-web` | `nextday-web` | — | `/`, `/vokbaths/`, `/klaustur/` |
+| Dr. Football | `drfootball` | `drfootball-portal` | D1 `drfootball-portal` | `/doc/` |
+| INNBAK | `innbak` | `innbak-portal`, `innbak-warehouse-ingest` | D1 `innbak-warehouse`, R2 `innbak-warehouse-evidence`, queues `innbak-warehouse-ingest`, `innbak-warehouse-dlq` | `/innbak/` |
