@@ -37,7 +37,16 @@ this page in the same change — never leave a one-off.
 | API token | `<slug>-<where>-<purpose>` | `innbak-github-deploy` |
 | Public URL path | `/<slug>/` | `/innbak/`, `/vokbaths/` |
 | MCP endpoint | `/<slug>/mcp` | `/innbak/mcp` |
-| Branch | `feat/…`, `fix/…`, `chore/…`, `docs/…` | `feat/budget-grid` |
+| Branch | from a Linear issue: `nex-<n>-<short-title>` (Linear's "copy branch name", format identifier-title); no issue: `feat/…`, `fix/…`, `chore/…`, `docs/…` | `nex-12-empty-invoice-page`, `docs/readme-monitoring` |
+| Company handle (every SaaS) | `nextday-is` | `github.com/nextday-is`, `linear.app/nextday-is`, `nextday-is.sentry.io` |
+| Linear team / issue key | team `Nextday`, key `NEX` | `NEX-12` |
+| Linear project | same as the repo or client slug | `innbak`, `nextday-web`, `nextday-platform`, `nextday-clients` |
+| Linear client label | group `client` → `<slug>` | `client/innbak` |
+| Sentry project | same as the Worker | `innbak-portal`, `nextday-web` |
+| Entra app registration | `nextday-<purpose>` (one app per purpose) | `nextday-access` |
+| App secret description | `<where>-<purpose>` | `cloudflare-access` |
+| Person / mailbox | `<firstname>@nextday.is` | `baldvin@nextday.is` |
+| Exchange migration | endpoint `<source>-<protocol>`, batch `<source>-<mailbox>` | `hostinger-imap`, `hostinger-baldvin` |
 | Commit | Conventional Commits | `fix: handle empty invoice page` |
 
 
